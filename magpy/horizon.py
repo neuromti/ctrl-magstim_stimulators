@@ -173,6 +173,7 @@ class Horizon(Magstim):
         return 1050.0 / Horizon.JOULES[power]
 
     def __init__(self, serialConnection, unlockCode=DEFAULT_UNLOCK_CODE, voltage=DEFAULT_VOLTAGE, version=DEFAULT_VIRTUAL_VERSION):
+        super(Horizon, self).__init__(serialConnection)
         self._unlockCode = unlockCode
         self.connectiontype = serialConnection
         self._voltage = voltage
@@ -187,10 +188,13 @@ class Horizon(Magstim):
 
     def _setupSerialPort(self, serialConnection):
         if serialConnection.lower() == 'virtual':
-            from _virtual import virtualPortController
+            from _virtual import virtualPortController, QuickFireBox
             self._connection = virtualPortController(self.__class__.__name__,self._sendQueue,self._receiveQueue,unlockCode=self._unlockCode,voltage=self._voltage,version=self._version)
+            self._qfb = QuickFireBox()
         else:
             self._connection = serialPortController(serialConnection, self._sendQueue, self._receiveQueue)
+            from horizon import QuickFireBox
+            self._qfb = QuickFireBox()
 
     def getVersion(self):
         """Get Magstim software version number.
@@ -673,7 +677,7 @@ class Horizon(Magstim):
         else:
             return super(Horizon,self).fire(receipt)
 
-    def quickFire(self):
+    def quickFire(self,duration):
         """Trigger the stimulator to fire with very low latency.
         
         N.B. The signal will be sent via the QuickFire-Box.
@@ -687,8 +691,8 @@ class Horizon(Magstim):
         if self._repetitiveMode and Horizon().ENFORCE_ENERGY_SAFETY and not self._sequenceValidated:
             return Magstim.SEQUENCE_VALIDATION_ERR
         else:
-            super(Horizon,self).quickFire()
-
+            self._qfb.trigger(duration)
+            
     def validateSequence(self):
         """Validate the energy consumption for the current rTMS parameters for the Horizon.
         
