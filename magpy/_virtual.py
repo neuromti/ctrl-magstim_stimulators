@@ -99,7 +99,8 @@ class virtualMagstim(Thread):
             self._instrStatus['armed'] = 0
             self._instrStatus['ready'] = 1
         # Check CRC of command
-        if calcCRC(message[:-1]) != message[-1]:
+        if calcCRC(bytearray(message[:-1],'latin_1')) != bytearray(message[-1],'latin_1'):
+        #if calcCRC(message[:-1]) != message[-1]:
             messageData = '?'
         else:
             #N.B. Remote control changes are automatically reflected in instrument status, unlike other commands (see below)           
@@ -160,7 +161,8 @@ class virtualMagstim(Thread):
             if self._connectionTimer is not None:
                 self._connectionTimer.cancel()
             self._startTimer()
-        returnMessage = message[0] + messageData
+        returnMessage = bytearray(message[0] + messageData,'latin_1')
+        #returnMessage = message[0] + messageData
         return returnMessage + calcCRC(returnMessage)
 
     def run(self):

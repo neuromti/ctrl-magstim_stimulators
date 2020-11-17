@@ -17,7 +17,7 @@ from math import ceil, floor
 from threading import Timer
 from yaml import load
 from ast import literal_eval
-from _virtual import virtualMagstim, virtualPortController
+from _virtual import virtualMagstim, virtualPortController, default_timer
 from base import Mock
 
 '''
@@ -127,7 +127,7 @@ class virtualHorizon(virtualMagstim):
         return virtualHorizon.MAX_FREQUENCY[self._voltage][self._super][self._params['power']]
 
     def _processMessage(self,message):
-
+        message = message.decode('latin_1')
         # Later versions of Magstim only respond to commands that don't require remote control when not under remote control
         if (message[0] not in {'Q', 'R', 'F', '\\'}) and not self._instrStatus['remoteStatus']:
             return None
@@ -248,7 +248,7 @@ class virtualHorizon(virtualMagstim):
                 if self._connectionTimer is not None:
                     self._connectionTimer.cancel()
                 self._startTimer()
-            returnMessage = message[0] + messageData
+            returnMessage = bytearray(message[0] + messageData,'latin_1')
             return returnMessage + calcCRC(returnMessage)
         # Otherwise, it did understand the message (one way or another, so return)
         else:
