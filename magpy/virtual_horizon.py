@@ -18,6 +18,30 @@ from threading import Timer
 from yaml import load
 from ast import literal_eval
 from _virtual import virtualMagstim, virtualPortController
+from base import Mock
+
+'''
+class virtualHorizonPortController(virtualPortController):
+    super.(virtualHorizon,self).__init__
+'''
+
+class QuickFireBox(Mock):
+    """For Triggering with low latency a second box is used."""
+      
+    def acknowledge(self, state=1):
+        msg = self.encode(b'\x06', state)
+        self.write(msg)
+    
+    def trigger(self, duration_in_us=1000):
+        """Trigger the BNC default for 1ms.
+        
+        Parameters
+        ----------
+        duration_in_us : int
+            trigger duration in microseconds
+        """
+        msg = self.encode(b'\x21', max(0, min((duration_in_us, 10000))))
+        self.write(msg)
 
 class virtualHorizon(virtualMagstim):
 
@@ -55,7 +79,6 @@ class virtualHorizon(virtualMagstim):
 
     def __init__(self,serialConnection, superRapid=DEFAULT_RAPID_TYPE, unlockCode=DEFAULT_UNLOCK_CODE, voltage=DEFAULT_VOLTAGE, version=DEFAULT_VIRTUAL_VERSION):
         super(virtualHorizon,self).__init__(serialConnection)
-
         self._super = superRapid
         self._unlockCode = unlockCode
         self._voltage = voltage
