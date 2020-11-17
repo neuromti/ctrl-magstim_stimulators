@@ -25,16 +25,16 @@ from ast import literal_eval
 if version_info >= (3,3):
     # In python 
     from time import perf_counter
-    defaultTimer = perf_counter
+    default_timer = perf_counter
 else:
     if platform == 'win32':
         # On Windows, use time.clock
         from time import clock
-        defaultTimer = clock
+        default_timer = clock
     else:
         # On other platforms use time.time
         from time import time    
-        defaultTimer = time
+        default_timerimer = time
 
 class virtualMagstim(Thread):
     def __init__(self,serialConnection):
