@@ -711,8 +711,12 @@ class Horizon(Magstim):
             return Magstim.MAX_ON_TIME_ERR
         else:
             self._sequenceValidated = True
+            minWaitTime = Horizon.MinWaitTime(parameters['rapidParam']['power'], parameters['rapidParam']['nPulses'], parameters['rapidParam']['frequency'])
+            print('Please attend the minimum wait time between trains is ',minWaitTime, ' seconds for the current settings!' )
+            continuousOperationFrequency = Magstim.getRapidMaxContinuousOperationFrequency(parameters['rapidParam']['power'])
+            print('The maximum stimulation frequency to allow for continous operation at the current output power level is ',continuousOperationFrequency,' Hz.')
             return (0, parameters)
-
+        
     def getSystemStatus(self):
         """Get system status from the Horizon.
 
