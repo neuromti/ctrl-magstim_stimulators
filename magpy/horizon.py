@@ -173,11 +173,11 @@ class Horizon(Magstim):
         return 1050.0 / Horizon.JOULES[power]
 
     def __init__(self, serialConnection, unlockCode=DEFAULT_UNLOCK_CODE, voltage=DEFAULT_VOLTAGE, version=DEFAULT_VIRTUAL_VERSION):
-        super(Horizon, self).__init__(serialConnection)
         self._unlockCode = unlockCode
         self.connectiontype = serialConnection
         self._voltage = voltage
         self._version = version if serialConnection.lower() == 'virtual' else (0,0,0)
+        super(Horizon, self).__init__(serialConnection)
         # If an unlock code has been supplied, then the Horizon requires a different command to stay in contact with it.
         if self._unlockCode:
             self._connectionCommand = (b'x@G', None, 6)
@@ -188,7 +188,7 @@ class Horizon(Magstim):
 
     def _setupSerialPort(self, serialConnection):
         if serialConnection.lower() == 'virtual':
-            from _virtual import virtualPortController, QuickFireBox
+            from virtual_horizon import virtualPortController, QuickFireBox
             self._connection = virtualPortController(self.__class__.__name__,self._sendQueue,self._receiveQueue,unlockCode=self._unlockCode,voltage=self._voltage,version=self._version)
             self._qfb = QuickFireBox()
         else:
