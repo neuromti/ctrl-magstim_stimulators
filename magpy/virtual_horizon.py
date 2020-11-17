@@ -154,7 +154,7 @@ class virtualHorizon(virtualMagstim):
                     # Get device version (for some reason this needs remote control status)
                     if message[0] == 'N':
                         if message[1] == 'D':
-                            messageData = ''.join([str(x) for x in self._version]) + '\x00'
+                            messageData = '\x56' + '.'.join([str(x) for x in self._version]) + '\x00'
                         else:
                             messageData = '?'
                     # Set power
