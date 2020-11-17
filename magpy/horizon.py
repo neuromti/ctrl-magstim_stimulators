@@ -91,7 +91,7 @@ class Horizon(Magstim):
     # Load settings file (resort to default values if not found)
     __location__ = realpath(join(getcwd(), dirname(__file__)))
     try:
-        with open(join(__location__, 'rapid_config.yaml')) as yaml_file:
+        with open(join(__location__, 'horizon_config.yaml')) as yaml_file:
             config_data = load(yaml_file)
     except:
         DEFAULT_VOLTAGE = 240
@@ -105,7 +105,7 @@ class Horizon(Magstim):
         DEFAULT_VIRTUAL_VERSION = literal_eval(config_data['virtualVersionNumber'])
 
     # Load system info file
-    with open(join(__location__, 'rapid_system_info.yaml')) as yaml_file:
+    with open(join(__location__, 'horizon_system_info.yaml')) as yaml_file:
         system_info = load(yaml_file)
     # Maximum allowed rTMS frequency based on voltage and current power setting
     MAX_FREQUENCY = system_info['maxFrequency']
@@ -437,7 +437,7 @@ class Horizon(Magstim):
         if updateError:
             return Magstim.PARAMETER_ACQUISTION_ERR
         else:
-            maxFrequency = Horizon.MAX_FREQUENCY[self._voltage][self._super][currentParameters['rapidParam']['power']] * 10
+            maxFrequency = Horizon.MAX_FREQUENCY[self._voltage][0][currentParameters['rapidParam']['power']] * 10
             if not (0 <= newFrequency <= maxFrequency):
                 return Magstim.PARAMETER_RANGE_ERR
 
@@ -631,7 +631,7 @@ class Horizon(Magstim):
             updateError, currentParameters = self.getParameters()
             if not updateError:
                 if not currentParameters['rapid']['singlePulseMode']:
-                    maxFrequency = Horizon.MAX_FREQUENCY[self._voltage][self._super][currentParameters['rapidParam']['power']]
+                    maxFrequency = Horizon.MAX_FREQUENCY[self._voltage][0][currentParameters['rapidParam']['power']]
                     if currentParameters['rapidParam']['frequency'] > maxFrequency:
                         if not self.setFrequency(maxFrequency)[0]:
                             return Magstim.PARAMETER_UPDATE_ERR
