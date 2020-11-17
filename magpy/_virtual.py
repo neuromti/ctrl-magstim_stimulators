@@ -21,15 +21,20 @@ from threading import Timer
 from yaml import load
 from ast import literal_eval
 
-#switch timer based on platform
-if platform == 'win32':
-    # On Windows, use time.clock
-    from time import clock
-    default_timer = clock
+# Switch timer based on python version and platform
+if version_info >= (3,3):
+    # In python 
+    from time import perf_counter
+    defaultTimer = perf_counter
 else:
-    # On other platforms use time.time
-    from time import time    
-    default_timer = time
+    if platform == 'win32':
+        # On Windows, use time.clock
+        from time import clock
+        defaultTimer = clock
+    else:
+        # On other platforms use time.time
+        from time import time    
+        defaultTimer = time
 
 class virtualMagstim(Thread):
     def __init__(self,serialConnection):
