@@ -237,7 +237,7 @@ class Horizon(Magstim):
         return self._processCommand(b'I@', 'error', 6)
 
     def connect(self, receipt=False):
-        """Connect to the Rapid.
+        """Connect to the Horizon.
         
         This starts the serial port controller,
         as well as a process that constantly keeps in contact with the Horizon so as not to lose control.
@@ -711,9 +711,9 @@ class Horizon(Magstim):
             return Magstim.MAX_ON_TIME_ERR
         else:
             self._sequenceValidated = True
-            minWaitTime = Horizon.MinWaitTime(parameters['rapidParam']['power'], parameters['rapidParam']['nPulses'], parameters['rapidParam']['frequency'])
+            minWaitTime = Horizon.getMinWaitTime(parameters['rapidParam']['power'], parameters['rapidParam']['nPulses'], parameters['rapidParam']['frequency'])
             print('Please attend the minimum wait time between trains is ',minWaitTime, ' seconds for the current settings!' )
-            continuousOperationFrequency = Magstim.getRapidMaxContinuousOperationFrequency(parameters['rapidParam']['power'])
+            continuousOperationFrequency = Horizon.getMaxContinuousOperationFrequency(parameters['rapidParam']['power'])
             print('The maximum stimulation frequency to allow for continous operation at the current output power level is ',continuousOperationFrequency,' Hz.')
             return (0, parameters)
         
