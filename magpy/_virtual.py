@@ -475,10 +475,13 @@ class virtualPortController(Thread):
             self._magstim = virtualBiStim(self._magstimConn)
         elif magstimType == 'Rapid':
             self._magstim = virtualRapid(self._magstimConn, **kwargs)
+        elif magstimType == 'Horizon':
+            from virtual_horizon import virtualHorizon
+            self._magstim = virtualHorizon(self._magstimConn, **kwargs)
         else:
             raise MagstimError('Unrecognised Magstim type.')
         self._magstim.daemon = True
-
+        
     def run(self):
         """
         Continuously monitor the serialWriteQueue for commands from other Python threads/processes to be sent to the virtual Magstim.
