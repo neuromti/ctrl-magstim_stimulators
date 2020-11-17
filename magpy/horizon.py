@@ -613,17 +613,10 @@ class Horizon(Magstim):
 
         """
         self._sequenceValidated =  False
-
-        # Check current enhanced power status
-        if self.isEnhanced():
-            maxPower = 110
-        else:
-            maxPower = 100
-
         # Make sure we have a valid power value
         if newPower % 1:
             return Magstim.PARAMETER_FLOAT_ERR
-        elif not 0 <= newPower <= maxPower:
+        elif not 0 <= newPower <= 100:
             return Magstim.PARAMETER_RANGE_ERR
         
         error, message = super(Horizon,self).setPower(newPower,True,delay,b'@')
