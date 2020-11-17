@@ -20,11 +20,6 @@ from ast import literal_eval
 from _virtual import virtualMagstim, virtualPortController, default_timer
 from base import Mock
 
-'''
-class virtualHorizonPortController(virtualPortController):
-    super.(virtualHorizon,self).__init__
-'''
-
 class QuickFireBox(Mock):
     """For Triggering with low latency a second box is used."""
       
@@ -51,14 +46,12 @@ class virtualHorizon(virtualMagstim):
         with open(join(__location__, 'rapid_config.yaml')) as yaml_file:
             config_data = load(yaml_file)
     except:
-        DEFAULT_RAPID_TYPE = 0
         DEFAULT_VOLTAGE = 240
         DEFAULT_UNLOCK_CODE = ''
         ENFORCE_ENERGY_SAFETY = True
         DEFAULT_VIRTUAL_VERSION = (5,0,0)
         DEFAULT_UNLOCK_CODE = '1234-12345678-ý\x91'
     else:
-        DEFAULT_RAPID_TYPE = config_data['defaultRapidType']
         DEFAULT_VOLTAGE = config_data['defaultVoltage']
         DEFAULT_UNLOCK_CODE = config_data['unlockCode']
         ENFORCE_ENERGY_SAFETY = config_data['enforceEnergySafety']
@@ -77,12 +70,12 @@ class virtualHorizon(virtualMagstim):
         """ Calculate maximum train duration for given power and frequency. If greater than 60 seconds, will allow for continuous operation for up to 6000 pulses."""
         return 63000.0 / (frequency * virtualHorizon.JOULES[power])
 
-    def __init__(self,serialConnection, superRapid=DEFAULT_RAPID_TYPE, unlockCode=DEFAULT_UNLOCK_CODE, voltage=DEFAULT_VOLTAGE, version=DEFAULT_VIRTUAL_VERSION):
+    def __init__(self,serialConnection, unlockCode=DEFAULT_UNLOCK_CODE, voltage=DEFAULT_VOLTAGE, version=DEFAULT_VIRTUAL_VERSION):
         super(virtualHorizon,self).__init__(serialConnection)
-        self._super = superRapid
         self._unlockCode = unlockCode
         self._voltage = voltage
         self._version = version
+        print('Version: ', self._version)
         self._secretUnlockCode = '1234-12345678-ý\x91'
         # If an unlock code has been supplied, then the Rapid requires a different command to stay in contact with it.
         if self._unlockCode:
@@ -99,7 +92,7 @@ class virtualHorizon(virtualMagstim):
                                          ('train',                 0),
                                          ('enhancedPowerMode',     0)])
 
-        self._extendedStatus = {'LSB': OrderedDict([('plus1ModuleDetected',     (1 if self._super > 1 else 0)),
+        self._extendedStatus = {'LSB': OrderedDict([('plus1ModuleDetected',      0),
                                                     ('specialTriggerModeActive', 0),
                                                     ('chargeDelaySet',           0),
                                                     ('Unused3',                  0),
@@ -124,7 +117,7 @@ class virtualHorizon(virtualMagstim):
         return str(self._params['power']).zfill(3) + str(self._params['frequency']).zfill(4) + str(self._params['nPulses']).zfill(4) + str(self._params['duration']).zfill(3) + str(self._params['wait']).zfill(3)
 
     def _getMaxFreq(self):
-        return virtualHorizon.MAX_FREQUENCY[self._voltage][self._super][self._params['power']]
+        return virtualHorizon.MAX_FREQUENCY[self._voltage][0][self._params['power']]
 
     def _processMessage(self,message):
         message = message.decode('latin_1')
