@@ -1,0 +1,6 @@
+defaultRapidType: 0
+defaultVoltage: 240
+enforceEnergySafety: true
+unlockCode: ""
+virtualVersionNumber: (9,4,0)
+virtualUnlockCode: "1234-12345678-ý\x91"
