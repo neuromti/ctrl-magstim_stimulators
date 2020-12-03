@@ -75,8 +75,7 @@ class virtualHorizon(virtualMagstim):
         self._unlockCode = unlockCode
         self._voltage = voltage
         self._version = version
-        print('Version: ', self._version)
-        self._secretUnlockCode = '1234-12345678-ý\x91'
+        self._secretUnlockCode = '7cef-5b86b67b-0a'
         # If an unlock code has been supplied, then the Rapid requires a different command to stay in contact with it.
         if self._unlockCode:
             self._connectionCommandCharacter = 'x'
@@ -112,6 +111,9 @@ class virtualHorizon(virtualMagstim):
 
     def _okToFire(self):
         return default_timer() > (self._lastFired + self._params['wait'])
+    
+    def _getRapidStatus(self):
+        return str(self._parseStatus(self._rapidStatus))
 
     def _getParams(self):
         return str(self._params['power']).zfill(3) + str(self._params['frequency']).zfill(4) + str(self._params['nPulses']).zfill(4) + str(self._params['duration']).zfill(3) + str(self._params['wait']).zfill(3)
@@ -193,19 +195,21 @@ class virtualHorizon(virtualMagstim):
                     # Enable/Disable enhanced power mode
                     elif message[0] in {'^','_'}:
                         if self._instrStatus['standby']:
-                            messageData += self._getRapidStatus 
-                            self._params['enhancedPowerMode'] = 1 if message[0] == '^' else 0
+                            messageData += self._getRapidStatus()
+                            self._rapidStatus['enhancedPowerMode'] = 1 if message[0] == '^' else 0
                         else:
                             messageData = 'S'
                     # Toggle repetitive mode
-                    elif message[0] == '[' and self._params['singlePulseMode']:
+                    elif message[0] == '[' and self._rapidStatus['singlePulseMode']:
+                        print('hmm',int(message[1:-1]))
                         if int(message[1:-1]) == 1 and self._instrStatus['standby']:
-                            self._params['singlePulseMode'] = 0
-                            messageData += self._getRapidStatus
+                            self._rapidStatus['singlePulseMode'] = 0
+                            print('Single: ',self._rapidStatus['singlePulseMode'])
+                            messageData += self._getRapidStatus()
                         else:
                             messageData = 'S'
                     # Set rTMS parameters
-                    elif message[0] in {'B','D','['} and not self._params['singlePulseMode']:
+                    elif message[0] in {'B','D','['} and not self._rapidStatus['singlePulseMode']:
                         try:
                             newParameter = int(message[1:-1])
                         except ValueError:
@@ -213,23 +217,23 @@ class virtualHorizon(virtualMagstim):
                         else:
                             if message[0] == 'B':
                                 if 0 < newParameter < self._getMaxFreq():
-                                    messageData += self._getRapidStatus 
+                                    messageData += self._getRapidStatus()
                                     self._params['frequency'] = newParameter
                                 else:
                                     messageData = 'S'
                             elif message[0] == 'D':
                                 if 1<= newParameter <= 6000:
-                                    messageData += self._getRapidStatus 
+                                    messageData += self._getRapidStatus()
                                     self._params['nPulses'] = newParameter
                                 else:
                                     messageData = 'S'
                             elif message[0] == '[':
                                 if 1 <= newParameter <= (9999 if self._version >= (9,0,0) else 999):
-                                    messageData += self._getRapidStatus 
+                                    messageData += self._getRapidStatus()
                                     self._params['duration'] = newParameter
                                 elif newParameter == 0 and self._instrStatus['standby']:
-                                    self._params['singlePulseMode'] = 1
-                                    messageData += self._getRapidStatus
+                                    self._rapidStatus['singlePulseMode'] = 1
+                                    messageData += self._getRapidStatus()
                                 else:
                                     messageData = 'S'
                 else:
