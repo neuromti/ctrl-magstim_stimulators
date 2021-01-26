@@ -11,14 +11,14 @@ from threading import Thread
 from sys import version_info, platform
 from os.path import realpath, join, dirname
 from os import getcwd
-from magstim import calcCRC, MagstimError
+from horizonmagpy.magstim import calcCRC, MagstimError
 from collections import OrderedDict
 from math import ceil, floor
 from threading import Timer
 from yaml import load
 from ast import literal_eval
-from _virtual import virtualMagstim, virtualPortController, default_timer
-from base import Mock
+from horizonmagpy._virtual import virtualMagstim, virtualPortController, default_timer
+from horizonmagpy.base import Mock
 
 class QuickFireBox(Mock):
     """For Triggering with low latency a second box is used."""
@@ -201,10 +201,8 @@ class virtualHorizon(virtualMagstim):
                             messageData = 'S'
                     # Toggle repetitive mode
                     elif message[0] == '[' and self._rapidStatus['singlePulseMode']:
-                        print('hmm',int(message[1:-1]))
                         if int(message[1:-1]) == 1 and self._instrStatus['standby']:
                             self._rapidStatus['singlePulseMode'] = 0
-                            print('Single: ',self._rapidStatus['singlePulseMode'])
                             messageData += self._getRapidStatus()
                         else:
                             messageData = 'S'

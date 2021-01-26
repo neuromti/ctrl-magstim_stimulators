@@ -12,7 +12,7 @@ if __name__ == "__main__":
 # otherwise ever-increasing number of additional processes
 #as the main script is imported in the child processes
     
-    stimulator = horizon.Horizon('COM5', unlockCode='7cef-5b86b67b-0a')
+    stimulator = horizon.Horizon('COM4', unlockCode='7cef-5b86b67b-0a')
     #ths creates two additional Python processes:
     #one for the purposes of directly controlling the serial port
     #and another for maintaining constant contact
@@ -35,7 +35,7 @@ if __name__ == "__main__":
    
     time.sleep(1)
     
-    stimulator.setPower(newPower=30)
+    stimulator.setPower(newPower=80)
     
     time.sleep(3)
     
@@ -70,6 +70,9 @@ if __name__ == "__main__":
     time.sleep(2)
     stimulator.rTMSMode(enable=False)
     time.sleep(2)
+    
+    print('System Settings: ', stimulator.getSystemStatus()[1])
+    time.sleep(3)
    # #horizon.setDuration(0)
     
     #%%%

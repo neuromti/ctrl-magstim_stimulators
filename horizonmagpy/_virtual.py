@@ -14,7 +14,7 @@ from threading import Thread
 from sys import version_info, platform
 from os.path import realpath, join, dirname
 from os import getcwd
-from magstim import calcCRC, MagstimError
+from horizonmagpy.magstim import calcCRC, MagstimError
 from collections import OrderedDict
 from math import ceil, floor
 from threading import Timer
@@ -478,7 +478,7 @@ class virtualPortController(Thread):
         elif magstimType == 'Rapid':
             self._magstim = virtualRapid(self._magstimConn, **kwargs)
         elif magstimType == 'Horizon':
-            from virtual_horizon import virtualHorizon
+            from horizonmagpy.virtual_horizon import virtualHorizon
             self._magstim = virtualHorizon(self._magstimConn, **kwargs)
         else:
             raise MagstimError('Unrecognised Magstim type.')

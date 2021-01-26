@@ -58,7 +58,7 @@ Design QuickFireBox:
 
 
 from __future__ import division
-from magstim import Magstim, serialPortController, MagstimError, connectionRobot
+from horizonmagpy.magstim import Magstim, serialPortController, MagstimError, connectionRobot
 import serial
 from sys import version_info, platform
 from os.path import realpath, join, dirname
@@ -69,7 +69,7 @@ from multiprocessing import Queue, Process
 from functools import partial
 from yaml import load
 from ast import literal_eval
-from base import Base
+from horizonmagpy.base import Base
 
 
 class QuickFireBox(Base):
@@ -188,7 +188,7 @@ class Horizon(Magstim):
 
     def _setupSerialPort(self, serialConnection):
         if serialConnection.lower() == 'virtual':
-            from virtual_horizon import virtualPortController, QuickFireBox
+            from horizonmagpy.virtual_horizon import virtualPortController, QuickFireBox
             self._connection = virtualPortController(self.__class__.__name__,self._sendQueue,self._receiveQueue,unlockCode=self._unlockCode,voltage=self._voltage,version=self._version)
             self._qfb = QuickFireBox()
         else:
