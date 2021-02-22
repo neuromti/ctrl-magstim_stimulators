@@ -5,7 +5,7 @@ Created on Tue Nov 17 09:43:05 2020
 @author: roboTMS
 """
 
-import horizon
+from horizonmagpy import horizon
 import time
 
 if __name__ == "__main__":
@@ -35,7 +35,7 @@ if __name__ == "__main__":
    
     time.sleep(1)
     
-    stimulator.setPower(newPower=80)
+    stimulator.setPower(newPower=100)
     
     time.sleep(3)
     

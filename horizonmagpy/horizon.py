@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+     # -*- coding: utf-8 -*-
 """
 Created on Mon Nov 16 13:31:07 2020
 
@@ -193,7 +193,7 @@ class Horizon(Magstim):
             self._qfb = QuickFireBox()
         else:
             self._connection = serialPortController(serialConnection, self._sendQueue, self._receiveQueue)
-            from horizon import QuickFireBox
+            from horizonmagpy.horizon import QuickFireBox
             self._qfb = QuickFireBox()
 
     def getVersion(self):
