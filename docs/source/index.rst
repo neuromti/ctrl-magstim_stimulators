@@ -3,13 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to magstim stimulators's documentation!
+Welcome to magstim stimulators' documentation!
 ===============================================
+
+.. include:: ..\..\README.md
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   Design <description>
+   Horizon <horizonmagpy.horizon>
+   Magstim (parent class) <horizonmagpy.magstim>
+   Example code <test>
 
 
 Indices and tables
