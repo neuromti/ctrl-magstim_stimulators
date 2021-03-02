@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 17 09:43:05 2020
-
-@author: roboTMS
-"""
-
 from horizonmagpy import horizon
 import time
 

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Code relating to controlling 200^2, BiStim^2, and Rapid^2 Magstim TMS units
-
-@author: Nicolas McNair
-"""
 from __future__ import division
 import serial
 from sys import version_info, platform
