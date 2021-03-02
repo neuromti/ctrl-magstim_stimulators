@@ -11,7 +11,7 @@ setup(
                  'Programming Language :: Python :: 2.7',
                  'Programming Language :: Python :: 3'],
     keywords='TMS Magstim',
-    packages=find_packages()
+    packages=find_packages(),
     package_data={'horizonmagpy':['*.yaml'],},
     python_requires = '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*',
     install_requires = ['pyserial']
