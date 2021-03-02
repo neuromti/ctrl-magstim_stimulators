@@ -1,0 +1,9 @@
+name: documentation-environment
+channels:
+  - tstenner
+dependencies:
+  - pip:
+      - m2r
+      - sphinx-autodoc-typehints
+      - sphinx-rtd-theme
+      - Sphinx==2.2.1
