@@ -2,6 +2,7 @@ name: documentation-environment
 channels:
   - tstenner
 dependencies:
+  - horizonmagpy
   - pip:
       - m2r
       - sphinx-autodoc-typehints
