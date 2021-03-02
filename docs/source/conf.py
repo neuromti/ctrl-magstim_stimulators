@@ -47,7 +47,11 @@ extensions = [
     "sphinx_rtd_theme",
 ]
 
-    
+# Add any paths that contain templates here, relative to this directory.
+autosummary_generate = True
+templates_path = ["_templates"]
+add_module_names = False  # use short names for functions and classes
+# napoleon docstring parsing    
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
 add_module_names = False
@@ -62,6 +66,7 @@ napoleon_use_param = True
 napoleon_use_rtype = True
     
 source_suffix = [".rst", ".md"]
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -70,6 +75,8 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+# The name of the Pygments (syntax highlighting) style to use.
+pygments_style = "sphinx"
 
 # -- Options for HTML output -------------------------------------------------
 
