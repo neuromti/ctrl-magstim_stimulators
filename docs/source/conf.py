@@ -16,7 +16,8 @@ sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('...'))
-#sys.path.insert(0, os.path.abspath('../horizonmagpy'))
+sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../horizonmagpy'))
 
 # -- Project information -----------------------------------------------------
 
@@ -93,6 +94,6 @@ html_static_path = ['_static']
 #for rtd autodoc
 import mock
 
-MOCK_MODULES = ['horizon', 'magstim']
+MOCK_MODULES = ['horizon', 'magstim','base','yaml']
 for mod_name in MOCK_MODULES:
    sys.modules[mod_name] = mock.Mock()
