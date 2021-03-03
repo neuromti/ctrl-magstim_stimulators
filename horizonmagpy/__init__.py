@@ -1,1 +1,1 @@
-__all__ = ["magstim"]
+__all__ = ["magstim","horizon"]
