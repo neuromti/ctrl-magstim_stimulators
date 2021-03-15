@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Magstim (Parent class) &mdash; magstim stimulators 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Example code" href="test.html" />
+    <link rel="prev" title="Horizon class" href="horizonmagpy.horizon.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> magstim stimulators
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="horizonmagpy.horizon.html">Horizon</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Magstim (parent class)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Example code</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">magstim stimulators</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Magstim (Parent class)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/horizonmagpy.magstim.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="magstim-parent-class">
+<h1>Magstim (Parent class)<a class="headerlink" href="#magstim-parent-class" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="horizonmagpy.magstim.Magstim">
+<em class="property">class </em><code class="sig-name descname">Magstim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">serialConnection</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base Magstim class. This is used for controlling 200^2 Magstim units, and acts as a parent class for the BiStim^2 and Rapid^2 sub-classes.</p>
+<p>It also creates two additional Python processes; one for the purposes of directly controlling the serial port and another for maintaining constant contact with the Magstim.</p>
+<p>N.B. This class can effect limited control over BiStim^2 and Rapid^2 units, however some functionality will not be able to be accessed and return values (including confirmation of commands) may be invalid.</p>
+<blockquote>
+<div><p>To begin sending commands to the Magstim, and start the additional Python processes, you must first call connect().</p>
+</div></blockquote>
+<p>Args:
+serialConnection (str): The address of the serial port. On Windows this is typically ‘COM1’ or similar. To create a virtual magstim, set the address to ‘virtual’</p>
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.COMMAND_CONFLICT_ERR">
+<code class="sig-name descname">COMMAND_CONFLICT_ERR</code><em class="property"> = (5, 'COMMAND_CONFLICT_ERR: Command conflicts with current system configuration.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.COMMAND_CONFLICT_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.CRC_MISMATCH_ERR">
+<code class="sig-name descname">CRC_MISMATCH_ERR</code><em class="property"> = (7, 'CRC_MISMATCH_ERR: Message contents and CRC value do not match.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.CRC_MISMATCH_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.GET_SYSTEM_STATUS_ERR">
+<code class="sig-name descname">GET_SYSTEM_STATUS_ERR</code><em class="property"> = (14, 'GET_SYSTEM_STATUS_ERR: Cannot call getSystemStatus() until software version has been established.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.GET_SYSTEM_STATUS_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.INVALID_COMMAND_ERR">
+<code class="sig-name descname">INVALID_COMMAND_ERR</code><em class="property"> = (3, 'INVALID_COMMAND_ERR: Invalid command sent.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.INVALID_COMMAND_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.INVALID_CONFIRMATION_ERR">
+<code class="sig-name descname">INVALID_CONFIRMATION_ERR</code><em class="property"> = (6, 'INVALID_CONFIRMATION_ERR: Unexpected command confirmation received.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.INVALID_CONFIRMATION_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.INVALID_DATA_ERR">
+<code class="sig-name descname">INVALID_DATA_ERR</code><em class="property"> = (4, 'INVALID_DATA_ERR: Invalid data provided.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.INVALID_DATA_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.MAX_ON_TIME_ERR">
+<code class="sig-name descname">MAX_ON_TIME_ERR</code><em class="property"> = (18, 'MAX_ON_TIME_ERR: Maximum on time exceeded for current train.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.MAX_ON_TIME_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.MIN_WAIT_TIME_ERR">
+<code class="sig-name descname">MIN_WAIT_TIME_ERR</code><em class="property"> = (17, 'MIN_WAIT_TIME_ERR: Minimum wait time between trains violated. Call isReadyToFire() to check.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.MIN_WAIT_TIME_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.NO_REMOTE_CONTROL_ERR">
+<code class="sig-name descname">NO_REMOTE_CONTROL_ERR</code><em class="property"> = (8, 'NO_REMOTE_CONTROL_ERR: You have not established control of the Magstim unit.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.NO_REMOTE_CONTROL_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.PARAMETER_ACQUISTION_ERR">
+<code class="sig-name descname">PARAMETER_ACQUISTION_ERR</code><em class="property"> = (9, 'PARAMETER_ACQUISTION_ERR: Could not obtain prior parameter settings.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.PARAMETER_ACQUISTION_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.PARAMETER_FLOAT_ERR">
+<code class="sig-name descname">PARAMETER_FLOAT_ERR</code><em class="property"> = (11, 'PARAMETER_FLOAT_ERR: A float value is not allowed for this parameter.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.PARAMETER_FLOAT_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.PARAMETER_PRECISION_ERR">
+<code class="sig-name descname">PARAMETER_PRECISION_ERR</code><em class="property"> = (12, 'PARAMETER_PRECISION_ERR: Only one decimal placed allowed for this parameter.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.PARAMETER_PRECISION_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.PARAMETER_RANGE_ERR">
+<code class="sig-name descname">PARAMETER_RANGE_ERR</code><em class="property"> = (13, 'PARAMETER_RANGE_ERR: Parameter value is outside the allowed range.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.PARAMETER_RANGE_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.PARAMETER_UPDATE_ERR">
+<code class="sig-name descname">PARAMETER_UPDATE_ERR</code><em class="property"> = (10, 'PARAMETER_UPDATE_ERR: Could not update secondary parameter to accommodate primary parameter change.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.PARAMETER_UPDATE_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.SEQUENCE_VALIDATION_ERR">
+<code class="sig-name descname">SEQUENCE_VALIDATION_ERR</code><em class="property"> = (16, 'SEQUENCE_VALIDATION_ERR: You must call validateSequence() before you can run a rTMS train.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.SEQUENCE_VALIDATION_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="horizonmagpy.magstim.Magstim.SYSTEM_STATUS_VERSION_ERR">
+<code class="sig-name descname">SYSTEM_STATUS_VERSION_ERR</code><em class="property"> = (15, 'SYSTEM_STATUS_VERSION_ERR: Method getSystemStatus() is not compatible with your software version.')</em><a class="headerlink" href="#horizonmagpy.magstim.Magstim.SYSTEM_STATUS_VERSION_ERR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.arm">
+<code class="sig-name descname">arm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">receipt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.arm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.arm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arm the stimulator.</p>
+<p>N.B. You must allow at around 1 s for the stimulator to arm.</p>
+<blockquote>
+<div><p>If you send an arm() command when the Magstim is already armed, you will receive an non-fatal error reply from the Magstim that the command conflicts with the current settings.</p>
+<p>If the unit does not fire for more than 1 min while armed, it will disarm</p>
+</div></blockquote>
+<p>Args:
+receipt (bool): whether to return occurrence of an error and the automated response from the Magstim unit (defaults to False)
+delay (bool): enforce delay to allow Magstim time to arm (defaults to False)</p>
+<p>Returns:
+If receipt argument is True:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">tuple:(error,message)</dt>
+<dd class="field-odd"><p>error (int): error code (0 = no error; 1+ = error)
+message (dict,str): if error is 0 (False) returns a dict containing a Magstim instrument status [‘instr’] dict, otherwise returns an error string</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>If receipt argument is False:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.connect">
+<code class="sig-name descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect to the Magstim.</p>
+<p>This starts the serial port controller, as well as a process that constantly keeps in contact with the Magstim so as not to lose control.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.disarm">
+<code class="sig-name descname">disarm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">receipt</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.disarm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.disarm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disarm the stimulator.</p>
+<p>Args:
+receipt (bool): whether to return occurrence of an error and the automated response from the Magstim unit (defaults to False)</p>
+<p>Returns:
+If receipt argument is True:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">tuple:(error,message)</dt>
+<dd class="field-odd"><p>error (int): error code (0 = no error; 1+ = error)
+message (dict,str): if error is 0 (False) returns a dict containing a Magstim instrument status [‘instr’] dict, otherwise returns an error string</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>If receipt argument is False:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.disconnect">
+<code class="sig-name descname">disconnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.disconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnect from the Magstim.</p>
+<p>This stops maintaining contact with the Magstim and turns the serial port controller off.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.fire">
+<code class="sig-name descname">fire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">receipt</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.fire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.fire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fire the stimulator.</p>
+<p>N.B. Will only succeed if previously armed.</p>
+<p>Args:
+receipt (bool): whether to return occurrence of an error and the automated response from the Magstim unit (defaults to False)</p>
+<p>Returns:
+If receipt argument is True:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">tuple:(error,message)</dt>
+<dd class="field-odd"><p>error (int): error code (0 = no error; 1+ = error)
+message (dict,str): if error is 0 (False) returns a dict containing a Magstim instrument status [‘instr’] dict, otherwise returns an error string</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>If receipt argument is False:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.getParameters">
+<code class="sig-name descname">getParameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.getParameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.getParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request current parameter settings from the Magstim.</p>
+<p>Returns:
+:tuple:(error,message):</p>
+<blockquote>
+<div><p>error (int): error code (0 = no error; 1+ = error)
+message (dict,str): if error is 0 (False) returns a dict containing Magstim instrument status [‘instr’] and parameter setting [‘magstimParam’] dicts, otherwise returns an error string</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.getTemperature">
+<code class="sig-name descname">getTemperature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.getTemperature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.getTemperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request current coil temperature from the Magstim.</p>
+<p>N.B. Coil1 and Coil2 refer to the separate windings in a single figure-8 coil connected to the Magstim.</p>
+<blockquote>
+<div><p>Magstim units will automatically disarm (and cannot be armed) if the coil temperature exceeds 40 degrees celsius.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>tuple:(error,message):</dt><dd><p>error (int): error code (0 = no error; 1+ = error)
+message (dict,str): if error is 0 (False) returns a dict containing Magstim instrument status [‘instr’] and coil temperature [‘magstimTemp’] dicts, otherwise returns an error string</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.isArmed">
+<code class="sig-name descname">isArmed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.isArmed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.isArmed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function that returns True if the Magstim is armed or ready, False if not or if it could not be determined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.isReadyToFire">
+<code class="sig-name descname">isReadyToFire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.isReadyToFire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.isReadyToFire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function that returns True if the Magstim is ready to fire, False if not or if it could not be determined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.isUnderControl">
+<code class="sig-name descname">isUnderControl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.isUnderControl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.isUnderControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function that returns True if the Magstim is under remote control, False if not or if it could not be determined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.parseMagstimResponse">
+<em class="property">static </em><code class="sig-name descname">parseMagstimResponse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">responseString</span></em>, <em class="sig-param"><span class="n">responseType</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.parseMagstimResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.parseMagstimResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interprets responses sent from the Magstim unit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.poke">
+<code class="sig-name descname">poke</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">silent</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.poke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.poke" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘Poke’ the stimulator with an enable remote control command (only if currently connected).
+This should be used prior to any time-senstive commands, such as triggering the magstim to coincide with stimulus presentation. Conservatively, around 40-50ms should
+be enough time to allow for (~20ms if ‘silently’ poking). This needs to be done to ensure that the ongoing communication with the magstim to maintain remote control
+does not interfere with the sent command. Note that this simply resets the timer controlling this ongoing communication (i.e., incrementing it a further 500 ms).</p>
+<p>Args:
+silent (bool): whether to bump polling robot but without sending enable remote control command (defaults to False)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.quickFire">
+<code class="sig-name descname">quickFire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.quickFire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.quickFire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger the stimulator to fire with very low latency using the RTS pin and a custom serial connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.remoteControl">
+<code class="sig-name descname">remoteControl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">enable</span></em>, <em class="sig-param"><span class="n">receipt</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.remoteControl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.remoteControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable/Disable remote control of stimulator. Disabling remote control will first disarm the Magstim unit.</p>
+<p>Args:
+enable (bool): whether to enable (True) or disable (False) control
+receipt (bool): whether to return occurrence of an error and the automated response from the Magstim unit (defaults to False)</p>
+<p>Returns:
+If receipt argument is True:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">tuple:(error,message)</dt>
+<dd class="field-odd"><p>error (int): error code (0 = no error; 1+ = error)
+message (dict,str): if error is 0 (False) returns a dict containing a Magstim instrument status [‘instr’] dict, otherwise returns an error string</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>If receipt argument is False:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.resetQuickFire">
+<code class="sig-name descname">resetQuickFire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.resetQuickFire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.resetQuickFire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the RTS pin used for quick firing.</p>
+<p>N.B. There must be a few ms between triggering QuickFire and reseting the pin.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="horizonmagpy.magstim.Magstim.setPower">
+<code class="sig-name descname">setPower</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">newPower</span></em>, <em class="sig-param"><span class="n">receipt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">_commandByte</span><span class="o">=</span><span class="default_value">b'&#64;'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim.setPower"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim.setPower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set power level for Magstim.</p>
+<p>N.B. Allow 100 ms per unit drop in power, or 10 ms per unit increase in power.</p>
+<p>Args:
+newPower (int): new power level (0-100)
+receipt (bool): whether to return occurrence of an error and the automated response from the Magstim unit (defaults to False)
+delay (bool): enforce delay to allow Magstim time to change Power (defaults to False)
+_commandByte should not be changed by the user</p>
+<p>Returns:
+If receipt argument is True:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">tuple:(error,message)</dt>
+<dd class="field-odd"><p>error (int): error code (0 = no error; 1+ = error)
+message (dict,str): if error is 0 (False) returns a dict containing a Magstim instrument status [‘instr’] dict, otherwise returns an error string</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>If receipt argument is False:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="test.html" class="btn btn-neutral float-right" title="Example code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="horizonmagpy.horizon.html" class="btn btn-neutral float-left" title="Horizon class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ricarda Staehle.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
