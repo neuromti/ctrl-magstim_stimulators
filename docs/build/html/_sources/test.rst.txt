@@ -3,6 +3,9 @@ Example code
 
 .. code-block:: python
 
+   from horizonmagpy import horizon
+   import time
+
    if __name__ == "__main__":
    # otherwise ever-increasing number of additional processes
    #as the main script is imported in the child processes

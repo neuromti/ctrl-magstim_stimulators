@@ -157,7 +157,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="magstim-parent-class">
-<h1>Magstim (Parent class)<a class="headerlink" href="#magstim-parent-class" title="Permalink to this headline">¶</a></h1>
+<span id="linkmagstim"></span><h1>Magstim (Parent class)<a class="headerlink" href="#magstim-parent-class" title="Permalink to this headline">¶</a></h1>
+<p>The Magstim class serves as parent class for all Magstim stimulator types.</p>
+<p>In addition, there are two further classes, that have not been documented at this point. First, the “serialPortController(Process)”, communicating with the serial port via two queues, one for writing and one for reading.
+Second,the “connectionRobot(Process) that sends an ‘enable remote control’ command to the Magstim via the serialPortController process every 500ms in order to maintain the contact to the stimulator.
+Further documentation is available in the <a class="reference external" href="https://github.com/nicolasmcnair/magpy/wiki">wiki of the original toolbox</a>.</p>
 <dl class="py class">
 <dt id="horizonmagpy.magstim.Magstim">
 <em class="property">class </em><code class="sig-name descname">Magstim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">serialConnection</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/magstim.html#Magstim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.magstim.Magstim" title="Permalink to this definition">¶</a></dt>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Horizon class &mdash; magstim stimulators 1.0.0 documentation</title>
+  <title>Horizon module &mdash; magstim stimulators 1.0.0 documentation</title>
   
 
   
@@ -137,7 +137,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Horizon class</li>
+      <li>Horizon module</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,9 +156,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-horizonmagpy.horizon">
-<span id="horizon-class"></span><span id="linkhorizon"></span><h1>Horizon class<a class="headerlink" href="#module-horizonmagpy.horizon" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
+  <div class="section" id="horizon-module">
+<span id="linkhorizon"></span><h1>Horizon module<a class="headerlink" href="#horizon-module" title="Permalink to this headline">¶</a></h1>
+<p>The horizon module consists of two classes.</p>
+<p>The Horizon class inherits from the <a class="reference internal" href="horizonmagpy.magstim.html#linkmagstim"><span class="std std-ref">Magstim class</span></a> , just as the Rapid class and Bitstim class do.
+The QuickFireBox class inherits from a class defined in <a class="reference external" href="https://github.com/neuromti/app-arduino">this repository</a> for controlling arduino microcontrollers in order two stimulate with low latency via BNC.</p>
+<span class="target" id="module-horizonmagpy.horizon"></span><dl class="py class">
 <dt id="horizonmagpy.horizon.Horizon">
 <em class="property">class </em><code class="sig-name descname">Horizon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">serialConnection</span></em>, <em class="sig-param"><span class="n">unlockCode</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">voltage</span><span class="o">=</span><span class="default_value">240</span></em>, <em class="sig-param"><span class="n">version</span><span class="o">=</span><span class="default_value">(9, 4, 0)</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/horizonmagpy/horizon.html#Horizon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#horizonmagpy.horizon.Horizon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="horizonmagpy.magstim.html#horizonmagpy.magstim.Magstim" title="horizonmagpy.magstim.Magstim"><code class="xref py py-class docutils literal notranslate"><span class="pre">horizonmagpy.magstim.Magstim</span></code></a></p>
